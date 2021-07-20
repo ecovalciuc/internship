@@ -1,0 +1,40 @@
+pipeline {
+    environment {
+        ECR_URL = "315727832121.dkr.ecr.us-east-1.amazonaws.com"
+        REPOSITORY = "ecovalciuc-petclinic"
+        CONTAINER_NAME = "ecovalciuc-java-petclinic"
+        DEPLOYMENT_NAME = "java-deployment"
+        NAMESPACE = "ecovalciuc-java-prod"
+    }
+    
+    agent {
+        node {
+            label 'Slave01'
+        }
+    }
+  
+    stages {
+        // Return image name and/or tag 
+        stage('SHOW PARAM') {
+            steps {
+                // cleanWs()
+                echo "$EcrParam_IMAGE" // will print selected image name value
+                echo "$EcrParam" // will print selected image name with tag
+                echo "$EcrParam_TAG" // will print selected tag value
+            }     
+        }
+        // Will replace deployment image to a newly chosen one. 
+        // EcrParam - The given name of "Image tag param plugin" in Jenkins
+        stage('IMAGE REPLACE') {
+            steps {
+                sh "kubectl get all -n ecovalciuc-java-prod"
+                // sh "kubectl apply -f "
+                sh "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${ECR_URL}/${REPOSITORY}:$EcrParam_TAG -n ${NAMESPACE}"
+                sh "sleep 20"
+                sh "kubectl get all -n ecovalciuc-java-prod"
+                sh "sleep 20"
+                sh "kubectl describe deployment -n ecovalciuc-java-prod"
+            }
+        }
+    }
+}

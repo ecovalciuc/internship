@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecovalciuc-service
+  namespace: ecovalciuc-java-prod
+  labels:
+    app: java-petclinic
+spec:
+  selector:
+    app: java-petclinic
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-deployment
+  namespace: ecovalciuc-java-prod
+  labels:
+    app: java-petclinic
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: java-petclinic
+  template:
+    metadata:
+      labels:
+        app: java-petclinic
+    spec:
+      containers:
+      - name: ecovalciuc-java-petclinic
+        image: 315727832121.dkr.ecr.us-east-1.amazonaws.com/ecovalciuc-petclinic:v_13_0220e0fa
+        ports:
+        - containerPort: 8080
+---
