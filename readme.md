@@ -136,19 +136,23 @@ The Spring PetClinic sample application is released under version 2.0 of the [Ap
 
 CI/CD was implemented using:
 
+
 Jenkinsfile
+
 Jenkins job type: multibranch pipeline
 Jenkins settings: webhook triggered by pushing code, SCM checkout
 Pipeline steps: Buiding and Scanning, Pushing tagged image to AWS ECR, Deploying app in EKS
 
 Dockerfile
+
 Jenkinsfile uses Dockerfile for buid and scann
 Dockerfile type - multistage build
 
-depl_dotnet.yaml
+depl_java.yaml
+
 This is Deplyment manifest file which is used by Jenkinsfile while Deploying the app. 
 
-ns_dotnet.yaml
+ns_java.yaml
 this file is used in Jenkinsfile for ECR namespace creation. A namespace once created using manifest file will be just checked for presence in the folowing running jobs. 
 
 deploy/Jenkinsfile
