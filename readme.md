@@ -139,15 +139,13 @@ The Spring PetClinic sample application is released under version 2.0 of the [Ap
 ## CI/CD was implemented using:
 
 
-Jenkinsfile
-
+#Jenkinsfile
 Jenkins job type: multibranch pipeline
 Jenkins settings: webhook triggered by pushing code, SCM checkout
 Pipeline steps: Buiding and Scanning, Pushing tagged image to AWS ECR, Deploying app in EKS
 
 
-Dockerfile
-
+#Dockerfile
 Jenkinsfile uses Dockerfile for buid and scann
 Dockerfile type - multistage build
 
