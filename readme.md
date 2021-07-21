@@ -138,7 +138,6 @@ The Spring PetClinic sample application is released under version 2.0 of the [Ap
 
 # CI/CD was implemented using:
 
-
 ### Jenkinsfile
 Jenkins job type: multibranch pipeline
 Jenkins settings: webhook triggered by pushing code, SCM checkout
@@ -155,7 +154,7 @@ This is Deplyment manifest file which is used by Jenkinsfile while Deploying the
 
 
 ### ns_java.yaml
-this file is used in Jenkinsfile for ECR namespace creation. A namespace once created using manifest file will be just checked for presence in the folowing running jobs. 
+This file is used in Jenkinsfile for ECR namespace creation. A namespace once created using manifest file will be just checked for presence in the folowing running jobs. 
 
 
 ### deploy/Jenkinsfile
